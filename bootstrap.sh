@@ -1,36 +1,21 @@
 #!/usr/bin/env bash
-#########################
-##  Personal Settings  ##
-#########################
 
 # Timezone for the system
 TimeZone="Europe/Berlin"
-
-
-
-########################################################################################################################
-##                                      Vagrant Bootstrap BASH Shell Script                                           ##
-########################################################################################################################
-
 
 ######################
 ##  Install System  ##
 ######################
 
-# Set new timezone
+# set timezone
 rm /etc/timezone
 echo $TimeZone > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
 
-
-
-# Update Packet Management System
 apt-get update
 
-# Install software into the system
 DEBIAN_FRONTEND=noninteractive apt-get install -q -y \
     apache2 libapache2-mod-php5 php5 php5-cli php5-xcache php5-common php5-curl php5-gd php5-json php5-ldap php5-mcrypt php5-mysqlnd php5-pgsql mysql-server-5.6 mysql-client-5.6 php5-memcache memcached unzip
-
 
 #PHP
 cat >> /etc/php5/mods-available/i-doit.ini <<EOL
@@ -149,7 +134,7 @@ table_open_cache = 2048
 sql-mode = ""
 EOL
 
-mysql -uroot -p -e"SET GLOBAL innodb_fast_shutdown = 0"
+mysql -u root -e"SET GLOBAL innodb_fast_shutdown = 0"
 service mysql stop
 mv /var/lib/mysql/ib_logfile[01] /tmp
 service mysql start

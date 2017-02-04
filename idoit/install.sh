@@ -7,8 +7,8 @@ mysqladmin -u root password Admin123#
 mkdir -p /var/www/html/idoit
 
 cd /vagrant/idoit
-unzip idoit-1.8.2.zip -d /var/www/html/idoit
-unzip idoit-api-1.8.zip -d /var/www/html/idoit
+unzip idoit-1.8.2.zip -d /var/www/html/idoit > /dev/null
+unzip idoit-api-1.8.zip -d /var/www/html/idoit > /dev/null
 
 cd /var/www/html/idoit/setup
 ./install.sh -m idoit_data -s idoit_system -n "Frickel GmbH" -a "Admin123#" -p "Admin123#" -q
@@ -22,9 +22,9 @@ cp isys_module_licence.class.php /var/www/html/idoit/src/classes/modules/licence
 
 chown www-data:www-data -R /var/www/html/idoit
 
-
-# TODO: Set bind address to all interfaces in my.cnf
-#bind-address = 127.0.0.1
+# bind mysql to all interfaces (comment out if you don't care for remote connections)
+sed -ie 's/bind-address/#bind-address/g' /etc/mysql/my.cnf
+service mysql restart
 
 # after installation of JSON module
 #mkdir -p idoit/upload/files
