@@ -1,6 +1,7 @@
 idoit/idoit_data.sql
 idoit/idoit_system.sql
-idoit/idoit-1.8.2.zip
-idoit/idoit-api-1.8.zip
+idoit/idoit.zip
+idoit/idoit-api.zip
 idoit/isys_module_licence.class.php
 .vagrant
+/ubuntu-xenial-16.04-cloudimg-console.log
